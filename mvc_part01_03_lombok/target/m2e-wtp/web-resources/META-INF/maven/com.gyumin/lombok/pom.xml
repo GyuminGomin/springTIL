@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.gyumin</groupId>
 	<artifactId>lombok</artifactId>
-	<name>mvc_part01_lombok</name>
+	<name>mvc_part01_03_lombok</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
