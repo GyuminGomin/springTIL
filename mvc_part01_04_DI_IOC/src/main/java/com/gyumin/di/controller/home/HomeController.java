@@ -67,6 +67,12 @@ public class HomeController {
 		log.info("size : {}", size);
 		log.info("uploadDir : {}", uploadDir);
 		
+		if (ts != null) {
+			ts.testService("Home Controller");
+		} else {
+			log.info("HomeController ts is null");
+		}
+		
 		if (td != null) {
 			td.select("Home Controller");
 		} else {

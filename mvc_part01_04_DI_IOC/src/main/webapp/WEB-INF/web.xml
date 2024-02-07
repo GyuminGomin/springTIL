@@ -30,4 +30,18 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
+	<!-- 요청 처리 서블릿 추가 -->
+	<servlet>
+		<servlet-name>secondServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:/spring/appServlet/second-servlet.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>secondServlet</servlet-name>
+		<url-pattern>/second/*</url-pattern>
+	</servlet-mapping>
 </web-app>
