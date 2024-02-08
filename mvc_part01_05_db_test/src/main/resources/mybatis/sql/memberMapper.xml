@@ -13,7 +13,7 @@
 	<!-- resultType="java.lang.Integer" insert, update, delete는 int로 반환타입 고정 -->
 	<insert id="insertMember"
 			statementType="PREPARED"
-			parameterType="com.gyumin.db_test.vo.MemberVO">
+			parameterType="member">
 		INSERT INTO tbl_member (userid, userpw, username) VALUES (#{userid},#{userpw},#{username})
 	</insert>
 	
@@ -21,7 +21,41 @@
 	<!-- java.lang.String -> String or string, java.lang.Integer -> int -->
 	<select id="read"
 			parameterType="String"
-			resultType="com.gyumin.db_test.vo.MemberVO">
+			resultType="member">
 		SELECT * FROM tbl_member WHERE userid = #{userid}		
 	</select>
+	
+	<!-- id와 pass로 사용자 정보 검색 -->
+	<select id="readPass"
+			parameterType="member"
+			resultType="member">
+		SELECT * FROM tbl_member WHERE userid = #{userid} AND userpw = #{userpw}
+	</select>
+	<!-- java.util.Map -->
+	<select id="readWithPass"
+			parameterType="Map"
+			resultType="member">
+		SELECT * FROM tbl_member WHERE userid = #{id} AND userpw = #{pw}			
+	</select>
+	
+	<!--
+		tbl table에 저장된 회원 목록을 List로 반환
+		selectList일 경우 resultType에는 List에 저장할 generic type만 지정
+	-->
+	<select id="memberList"
+			statementType="STATEMENT"
+			resultType="member"> <!-- 어짜피 List가 반환되므로 제네릭 타입만 지정해주면 됨 -->
+		SELECT * FROM tbl_member ORDER BY regdate DESC
+	</select>
+	
+	<update id="updateMember"
+			parameterType="member">
+		UPDATE tbl_member SET userpw = #{userpw}, updatedate = now() WHERE uno = #{uno}		
+	</update>
+	
+	<!-- 회원 정보 삭제 -->
+	<delete id="remove"
+			parameterType="int">
+		DELETE FROM tbl_member WHERE uno = #{uno}			
+	</delete>
 </mapper>
