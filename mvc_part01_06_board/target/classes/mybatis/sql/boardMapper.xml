@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="boardMapper">
+	
+	<!-- 게시글 작성 -->
+	<insert id="insertBoard"
+			parameterType="boardVO">
+		INSERT INTO tbl_board (title, content, writer) VALUES(#{title}, #{content}, #{writer})		
+	</insert>
+	
+	<!-- 게시글 상세보기 -->
+	<select id="boardDetail"
+			parameterType="int"
+			resultType="boardVO">
+		SELECT * FROM tbl_board WHERE bno = #{bno}
+	</select>
+	
+	<!-- 게시글 수정 -->
+	<update id="updateBoard"
+			parameterType="boardVO">
+		UPDATE tbl_board SET title=#{title}, content=#{content} WHERE bno = #{bno}		
+	</update>
+	
+	<!-- 게시글 삭제 -->
+	<delete id="deleteBoard"
+			parameterType="int">
+		DELETE FROM tbl_board WHERE bno = #{bno}
+	</delete>
+	
+	<!-- 게시물 리스트 목록 보기 (페이징 처리 된)-->
+	<select id="listPageCri"
+			parameterType="cri"
+			resultType="boardVO">
+		SELECT * FROM tbl_board ORDER BY bno DESC limit #{startRow}, #{perPageNum}		
+	</select>
+	
+	<!-- 게시물 전체 개수 (totalCount) -->
+	<select id="totalCount"
+			statementType="STATEMENT"
+			resultType="int">
+		SELECT count(*) FROM tbl_board		
+	</select>
+	
+	<!-- 게시물 조회시 조회수 증가 -->
+	<update id="viewcnt"
+			parameterType="int">
+		UPDATE tbl_board SET viewcnt = viewcnt+1 WHERE bno = #{bno}		
+	</update>
+</mapper>
+
+
+
+
+
+
+
+
+
