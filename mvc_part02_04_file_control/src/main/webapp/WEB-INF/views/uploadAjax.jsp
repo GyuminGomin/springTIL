@@ -62,21 +62,33 @@
 					console.log(result);
 					let str = "";
 					for (let i =0; i <result.length; i++) {
+						str += "<div>"
 						let isImage = checkImageType(result[i]);
 						console.log(isImage);
 						if(isImage) {
 							console.log("이미지 파일");
 							str += "<div>";
-							str += "<img src='${path}/upload"+result[i]+"' />";
+							// str += "<img src='${path}/upload"+result[i]+"' />";
+							str += "<img src='displayFile?fileName="+result[i]+"' />";
 							str += "</div>";
-							str += "<a href=''>"+ getOriginalName(result[i]) +"</a>";
+							let original = result[i].replace("s_","");
+							str += "<a href='displayFile?fileName="+original+"' target='_blank'>"+ getOriginalName(result[i]) +"</a>";
 						} else {
 							console.log("일반 파일");
 							str += "<div>";
 							str += "<img src='${path}/resources/img/file.png' />";
 							str += "</div>";
-							str += "<a href=''>"+ getOriginalName(result[i]) +"</a>";
+							str += "<a href='displayFile?fileName="+result[i]+"'>"+ getOriginalName(result[i]) +"</a>";
 						}
+						/* 파일 삭제 */
+						str += "&nbsp;&nbsp;&nbsp;&nbsp;";
+						str += "<span data-giguen='"+result[i]+"'>&times;</span>" /* x표시 */
+						str += "</div>"
+						
+						
+						
+						
+						
 					} // end for
 					$("#uploadedList").append(str);
 				} // end success
@@ -104,6 +116,25 @@
 			}
 			return false;
 		}
+		
+		// span tag click 시 file 삭제 요청 처리
+		$("#uploadedList").on("click", "span", function() {
+			// event가 발생한 span 태그 요소
+			let target = $(this);
+			// 요소의 속성 중 사용자 정의형 속성에 저장된 파일 이름 호출
+			let fileName = target.attr("data-giguen");
+			console.log(fileName);
+			$.ajax({
+				type : "DELETE",
+				url : "deleteFile",
+				data : fileName,
+				dataType : "text",
+				success : function(result) {
+					alert(result);
+					target.parent("div").remove();
+				}
+			});
+		});
 	</script>
 </body>
 </html>

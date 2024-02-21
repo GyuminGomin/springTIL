@@ -73,6 +73,9 @@ public class FileController {
 	@GetMapping("uploadAjax")
 	public void uploadAjax() {}
 	
+	@GetMapping("profile")
+	public void profile() {}
+	
 	@PostMapping("uploadForm")
 	public String uploadForm(
 			MultipartFile file,
