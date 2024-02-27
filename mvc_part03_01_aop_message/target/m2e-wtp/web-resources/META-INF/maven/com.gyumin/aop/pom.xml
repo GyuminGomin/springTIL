@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.gyumin</groupId>
 	<artifactId>aop</artifactId>
-	<name>mvc_part03_aop_message</name>
+	<name>mvc_part03_01_aop_message</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>

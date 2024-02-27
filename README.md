@@ -62,4 +62,22 @@
 - 파일확장자는 URI에 포함하지 않는다.
 - 리소스 간에는 연관 관계가 있는 경우
 
-### 
+### 전처리 후처리
+
+- 종류 : Filter, AOP, intercepter
+
+- Filter
+    - request
+- AOP
+    - httprequest
+- intercepter
+    - 웹 애플리케이션 내에서 특정한 URI 호출을 말 그대로 '가로채는' 역할
+    - URI 요청에 따라 dispatcherServlet에 의해 호출되는 메소드
+    - AOP의 Advice와 차이는 전달받는 파라미터 차이
+    - business
+
+- 전체적인 흐름
+    - Filter -> intercepter -> AOP -> AOP -> intercepter -> Filter
+
+- Filter와 interceptor의 큰 차이
+    - Filter는 배포서술자에 기술(빈 사용 불가), interceptor는 빈 사용 가능

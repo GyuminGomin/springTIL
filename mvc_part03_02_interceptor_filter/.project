@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>mvc_part03_aop_message</name>
+	<name>mvc_part03_02_interceptor_filter</name>
 	<comment></comment>
 	<projects>
 	</projects>
