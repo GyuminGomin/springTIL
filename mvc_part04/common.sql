@@ -17,7 +17,7 @@ CREATE TABLE re_tbl_board(
 	seq INT NULL DEFAULT 0,							-- 그룹 정렬 번호
 	regdate TIMESTAMP NULL DEFAULT now(),			-- 게시글 작성 시간
 	updatedate TIMESTAMP NULL DEFAULT now(),		-- 게시글 수정 시간
-	viewcnt INT NULL DEFAULT 0,					-- 조회수
+	viewcnt INT NULL DEFAULT 0,						-- 조회수
 	showboard VARCHAR(10) NULL DEFAULT 'y',			-- 삭제 요청 여부
 	uno INT NOT NULL,								-- 게시글 작성자 회원 번호
 	CONSTRAINT fk_re_tbl_uno
@@ -26,4 +26,5 @@ CREATE TABLE re_tbl_board(
 );
 
 SELECT * FROM re_tbl_board;
+
 
