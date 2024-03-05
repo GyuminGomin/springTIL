@@ -23,6 +23,9 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	<!-- multipart/form-data -->
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver" />
+	
 	<context:component-scan base-package="com.gyumin.*.controller" />
 	<context:component-scan base-package="com.gyumin.*.service" />
 	<context:component-scan base-package="com.gyumin.common.aop" />

@@ -36,6 +36,11 @@
 			<param-value>classpath:context/mvc/*-context.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
+		<multipart-config>
+			<!-- <max-file-size>20971520</max-file-size>
+			<max-request-size>41943040</max-request-size>  생략가능 (기본값 -1) -->
+			<file-size-threshold>1024</file-size-threshold>
+		</multipart-config>
 	</servlet>
 		
 	<servlet-mapping>
