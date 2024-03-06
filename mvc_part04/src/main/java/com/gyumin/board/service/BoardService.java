@@ -90,7 +90,12 @@ public class BoardService {
 		mapper.modify(board);
 	}
 
+	@Transactional
 	public void remove(int bno) throws Exception{
+		// 첨부파일 db 삭제
+		attachMapper.deleteAttach(bno);
+		
+		// re_tbl_board 게시글 정보 삭제
 		mapper.remove(bno);
 	}
 }

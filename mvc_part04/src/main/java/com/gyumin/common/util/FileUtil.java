@@ -157,7 +157,10 @@ public class FileUtil {
 		fileName = new String(fileName.getBytes("UTF-8"), "ISO-8859-1"); // UTF-8로 되어있는 문자열을 byte 배열로 바꾼 후, ISO-8859-1로 변환
 		headers.add("Content-Disposition", "attachment;fileName=\""+fileName+"\""); // header 정보는 ISO-8859-1로 바껴서 전송되기 때문에
 		*/
-		ContentDisposition cd = ContentDisposition.attachment().filename(fileName, Charset.forName("UTF-8")).build();
+		ContentDisposition cd = ContentDisposition
+								.attachment()
+								.filename(fileName, Charset.forName("UTF-8"))
+								.build();
 		headers.setContentDisposition(cd);
 		return headers;
 	}
