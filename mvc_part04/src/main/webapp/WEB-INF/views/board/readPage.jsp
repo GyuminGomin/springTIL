@@ -123,4 +123,6 @@
 		}
 	});
 </script>
+<br/>
+<%@ include file="/WEB-INF/views/comment/comment.jsp" %>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

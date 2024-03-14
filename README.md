@@ -81,3 +81,17 @@
 
 - Filter와 interceptor의 큰 차이
     - Filter는 배포서술자에 기술(빈 사용 불가), interceptor는 빈 사용 가능
+
+## Spring Security
+- 다중 접속 방지, csrf 공격 방지 간단히 구현 가능
+- 인증은 애플리케이션 작업을 수행할 수 있는 주체(사용자)라고 주장할 수 있는 것을 말하며 권한은 인증된 주체가 애플리케이션에 접속할 수 있는 것
+
+- 주요 용어
+    - 접근 주체(Principal) : 보호된 대상에 접근하는 유저
+    - 인증(Authentication) : 증명, 유저가 누구인지 확인하는 것, 통상 회원가입하고 로그인하는 것을 ㅁ의미
+    - 인가() : 허락, 유저에 대한 권한을 확인
+
+- Filter, Interceptor로 인증, 인가 권한을 부여하는 것을 spring security라고 함
+
+- spring security의 구조
+<img src="./images/image.png" />

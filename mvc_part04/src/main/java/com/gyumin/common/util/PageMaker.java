@@ -20,7 +20,13 @@ public class PageMaker {
 	private boolean prev;		// 이전페이지 블럭 존재 여부
 	private boolean next;		// 마지막페이지 블럭 존재 여부
 	
-	private Criteria cri;		// 요청 페이지 , 한번에 보여줄 게시물 수
+	/**
+	 * 2024-03-13 
+	 * 검색 기능이 추가된 자식 객체
+	 * SearchPageMaker에서 필드를 사용할수 있도록
+	 * protected 접근 제한자로 변경
+	 */
+	protected Criteria cri;		// 요청 페이지 , 한번에 보여줄 게시물 수
 	
 	public PageMaker() {
 		this(new Criteria(),0);

@@ -39,3 +39,26 @@ CREATE TABLE tbl_attach (
 );
 
 SELECT * FROM tbl_attach;
+
+
+
+-- 2024-03-13 검색 Query 테스트
+SELECT bno, title, writer, regdate, showboard, viewcnt
+FROM re_tbl_board
+WHERE (title LIKE CONCAT('%','THOR','%')) 
+OR (content LIKE CONCAT('%','THOR','%')) 
+OR (writer LIKE CONCAT('%','THOR','%'))
+ORDER BY origin DESC, seq ASC LIMIT 0, 10;
+
+-- 2024-03-13 re_tbl_board 댓글 테이블 추가
+CREATE TABLE IF NOT EXISTS re_tbl_comment(
+	cno INT PRIMARY KEY auto_increment, 			-- 댓글 번호
+	bno INT NOT NULL,						-- 댓글 작성 게시글 번호
+	commentText TEXT NOT NULL,					-- 댓글 내용
+	commentAuth VARCHAR(300) NOT NULL,				-- 작성자
+	regdate TIMESTAMP NOT NULL DEFAULT now(),			-- 작성시간
+	updatedate TIMESTAMP NOT NULL DEFAULT now(), 		-- 수정시간
+	CONSTRAINT fk_re_tbl_bno FOREIGN KEY(bno)       		-- 외래키 지정
+	REFERENCES re_tbl_board(bno) ON DELETE CASCADE, 		-- 게시글 삭제 시 참조하는 댓글도 삭제
+	INDEX(bno)							-- bno column 인덱스 지정
+);

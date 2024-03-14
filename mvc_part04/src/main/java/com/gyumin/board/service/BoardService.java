@@ -1,6 +1,8 @@
 package com.gyumin.board.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -8,6 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.gyumin.board.mapper.AttachmentMapper;
 import com.gyumin.board.mapper.BoardMapper;
 import com.gyumin.board.vo.BoardVO;
+import com.gyumin.common.util.SearchCriteria;
+import com.gyumin.common.util.SearchPageMaker;
 
 import lombok.RequiredArgsConstructor;
 
@@ -107,5 +111,28 @@ public class BoardService {
 		
 		// re_tbl_board 게시글 정보 삭제
 		mapper.remove(bno);
+	}
+	
+	/**
+	 * TODO board search BoardService check
+	 * @since 2024-03-13
+	 * @param SearchCriteria - 검색과 페이징 처리에 필요한 정보를 저장하는 객체 
+	 * @return 검색과 페이징 처리된 게시글 목록과 페이지 블럭 출력을 위한 PageMaker를 Map으로 반환
+	 */
+	public Map<String, Object> listCriteria(SearchCriteria cri) throws Exception {
+		List<BoardVO> list = mapper.listCriteria(cri);
+		// 검색 범위내 전체 게시글 개수
+		int totalCount = mapper.listCountCriteria(cri);
+		
+		// 검색된 정보로 페이징 블럭 정보 생성
+		SearchPageMaker pm = new SearchPageMaker();
+		pm.setCri(cri);
+		pm.setTotalCount(totalCount);
+		
+		// 페이징 처리된 검색 게시글 목록과 페이징 블럭 정보를 맵으로 반환
+		Map<String, Object> map = new HashMap<>();
+		map.put("qnaList", list);
+		map.put("pm", pm);
+		return map;
 	}
 }

@@ -1,16 +1,19 @@
 package com.gyumin.board.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.gyumin.board.service.BoardService;
 import com.gyumin.board.vo.BoardVO;
+import com.gyumin.common.util.SearchCriteria;
 
 import lombok.RequiredArgsConstructor;
 
@@ -21,10 +24,26 @@ public class BoardController {
 	
 	private final BoardService bs;
 	
+	/**
+	 * TODO board search BoardController check
+	 * @since 2024-03-13
+	 * @param 검색 기능 추가를 위해 SearchCriteria 객체 매개변수 추가
+	 */
 	@GetMapping("listReply")
-	public String listReply(Model model) throws Exception {
-		List<BoardVO> list = bs.list();
-		model.addAttribute("qnaList", list);
+	public String listReply(
+				// ModelAttribute를 추가하지 않으면 
+				// SearchCriteria가 Model에 자동으로 등록되긴하나
+				// key name 이 searchCriteria로 등록됨. - 사용하고자 하는 이름으로 등록
+				@ModelAttribute(name = "cri") SearchCriteria cri,
+				Model model) throws Exception {
+		// 2024-03-13 전체 게시글 검색 제거
+		// List<BoardVO> list = bs.list();
+		// model.addAttribute("qnaList",list);
+		
+		// 2024-03-13 페이징 처리된 검색 게시글 목록과 페이징 블럭 정보를 
+		// map형태로 model에 한번에 추가
+		Map<String, Object> listMap = bs.listCriteria(cri);
+		model.addAllAttributes(listMap);
 		return "board/listReply";
 	}
 	
